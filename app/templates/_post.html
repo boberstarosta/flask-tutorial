@@ -5,10 +5,9 @@
       <a href="{{ url_for('user', username=post.author.username) }}">
         {{ post.author.username }}
       </a>
-      says:
+      {{ _('said') }} {{ post.timestamp }}
       <br>
       {{ post.body }}
     </td>
   </tr>
 </table>
-
