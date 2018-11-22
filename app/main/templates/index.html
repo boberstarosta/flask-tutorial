@@ -10,12 +10,16 @@
     <br>
   {% endif %}
 
-  {% include '_page_nav.html' %}
+  {% if posts %}
+    {% include '_page_nav.html' %}
 
-  {% for post in posts %}
-    {% include '_post.html' %}
-  {% endfor %}
+    {% for post in posts %}
+      {% include '_post.html' %}
+    {% endfor %}
 
-  {% include '_page_nav.html' %}
+    {% include '_page_nav.html' %}
+  {% else %}
+    <p class="text-muted">{{ _('No posts') }}</p>
+  {% endif %}
 
 {% endblock %}
