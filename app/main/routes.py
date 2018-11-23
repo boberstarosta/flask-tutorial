@@ -144,12 +144,14 @@ def translate_text():
 def search():
     if not g.search_form.validate():
         return redirect(url_for('main.explore'))
+    keywords = g.search_form.q.data.split()
     page = request.args.get('page', 1, type=int)
-    posts, total = Post.search(g.search_form.q.data, page,
-                               current_app.config['POSTS_PER_PAGE'])
+    posts = Post.search(keywords).order_by(Post.timestamp.desc()).paginate(
+        page, current_app.config['POSTS_PER_PAGE'], False)
     next_url = url_for('main.search', q=g.search_form.q.data, page=page + 1) \
-        if total > page * current_app.config['POSTS_PER_PAGE'] else None
+        if posts.has_next else None
     prev_url = url_for('main.search', q=g.search_form.q.data, page=page - 1) \
-        if page > 1 else None
-    return render_template('search.html', title=_('Search'), posts=posts,
+        if posts.has_prev else None
+    return render_template('search.html', title=_('Search'), posts=posts.items,
                            next_url=next_url, prev_url=prev_url)
+
