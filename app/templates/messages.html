@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+
+{% block app_content %}
+
+  <h1>{{ _('Messages') }}</h1>
+
+  {% if messages %}
+    {% include '_page_nav.html' %}
+
+    {% for post in messages %}
+        {% include '_post.html' %}
+    {% endfor %}
+
+    {% include '_page_nav.html' %}
+  {% else %}
+    <p class="text-muted">{{ _('No messages') }}</p>
+  {% endif %}
+
+{% endblock %}
