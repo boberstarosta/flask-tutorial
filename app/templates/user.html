@@ -2,11 +2,13 @@
 
 {% block app_content %}
 
-  <table class="tabe table-hover">
+  <table class="tabe">
     <tr>
-      <td width="256px"><img src="{{ user.avatar(256) }}"></td>
+      <td width="256px" style="border: 0px;">
+        <img src="{{ user.avatar(256) }}">
+      </td>
 
-      <td>
+      <td style="border: 0px;">
         <h1>{{ _('User:') }} {{ user.username }}</h1>
 
         {% if user.about_me %}
